@@ -60,7 +60,7 @@ def MSE(h, y):  # mean squared error loss as our model criterion
     J = 0.5 * np.matmul(diff.T, diff) # cost = 0.5 diff^2
     return float(J) # return the cost as a float rather than a 1x1 matrix
 
-def SGD(batch_size):    # stochastic gradient descent
+def SGD(datain, batch_size):    # stochastic gradient descent
     sample = np.random.randint(m, size=batch_size)  # create a list of batch_size=32 random indices to include in the
                                                     # training batch
 
@@ -77,14 +77,14 @@ def SGD(batch_size):    # stochastic gradient descent
 
     return cost # return how bad the model is
 
-def train():
+def train(datain):
     costs=[]    # initialise an empty list of costs for visualisation
     for e in range(epochs): # for however many epochs specialises
 
         print('b', mymodel.bias[0]) # print bias
         print('w', mymodel.weights) # print weights
 
-        cost = SGD(batch_size)  # calculate cost for a specified batch size
+        cost = SGD(datain, batch_size)  # calculate cost for a specified batch size
         costs.append(cost) # add cost to list of history
         print('Epoch', e, 'Cost', cost)
 
@@ -125,4 +125,4 @@ mymodel = LinearModel() # create an instance of a linear model
 
 datain = scaled # set the data going in to our model as our scaled data (not necessary really)
 
-train()     # finally, call the function to train our model
+train(datain)     # finally, call the function to train our model
